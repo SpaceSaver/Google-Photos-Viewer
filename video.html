@@ -20,7 +20,7 @@
             }
             function createmeta(property, content){
                 var tag = document.createElement("meta");
-                tag.property = property;
+                tag.setAttribute("property", property);
                 tag.content = content;
                 document.head.appendChild(tag);
             }
