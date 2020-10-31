@@ -1,38 +1,56 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Google Video Viewer</title>
+        <script src="ultimate-cookie-and-path-vars-pkg.js"></script>
+        <link id="appleo" rel="apple-touch-icon" href="older-iPhone.png">
+        <link id="apple6" rel="apple-touch-icon" sizes="180x180" href="iPhone-6-Plus.png">
+        <link id="appleret" rel="apple-touch-icon" sizes="152x152" href="iPad-Retina.png">
+        <link id="appletouch" rel="apple-touch-icon" sizes="167x167" href="iPad-Pro.png">
+        <link id="icon16" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-16x16.png" sizes="16x16">
+        <link id="icon32" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-32x32.png" sizes="32x32">
+        <link id="icon64" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-96x96.png" sizes="96x96">
+        <!meta id="ogtitle" property="og:title">
+        <!meta id="ogurl" property="og:url">
+        <!meta id="ogtype" property="og:type" content="video.other">
+        <!meta id="ogdescription" property="og:description">
+        <!meta id="ogimage" property="og:image">
         <script>
-            function submit(){
-                var box = document.getElementById("url");
-                var copy = document.getElementById("copy");
-                var titlebox = document.getElementById("title");
-                var descriptionbox = document.getElementById("description");
-                copy.value = window.location.href.replace(/\/index\.html.*/, "") + "/video.html?url=" + encodeURIComponent(box.value.split("=")[0] + "=dv") + "&title=" + encodeURIComponent(titlebox.value) + "&description=" + encodeURIComponent(descriptionbox.value);
-                copy.select();
-                copy.setSelectionRange(0, 99999);
-                document.execCommand("copy");
+            function basemod(base, args){
+                return base.split("=")[0] + "=" + args;
             }
+            function createmeta(property, content){
+                var tag = document.createElement("meta");
+                tag.property = property;
+                tag.content = content;
+                document.head.appendChild(tag);
+            }
+            var params = getVarParse();
+            var base = params["url"];
+            document.title = params["title"];
+            document.getElementById("appleo").href = basemod(base, "w120-h120");
+            document.getElementById("apple6").href = basemod(base, "w180-h180");
+            document.getElementById("appleret").href = basemod(base, "w152-h152");
+            document.getElementById("appletouch").href = basemod(base, "w167-h167");
+            document.getElementById("icon16").href = basemod(base, "w16-h16");
+            document.getElementById("icon32").href = basemod(base, "w32-h32");
+            document.getElementById("icon64").href = basemod(base, "w64-h64")
+            /*document.getElementById("ogtitle").content = params["title"];
+            document.getElementById("ogurl").content = window.location.href;
+            document.getElementById("ogdescription").content = params["description"];
+            document.getElementById("ogimage").content = basemod(base, "w1920-h1080");*/
+            createmeta("og:title", params["title"]);
+            createmeta("og:url", window.location.href);
+            createmeta("og:type", "video.other");
+            createmeta("og:description", params["description"])
+            createmeta("og:image", basemod(base, "w1920-h1080"))
         </script>
     </head>
-    <body>
-        <h3>Creation Attributes:</h3>
-        <div style="margin-left: 5%;">
-            <div>
-                <p style="display: inline-block;">Base url of item:</p>
-                <input type="text" style="display: inline-block;" id="url">
-            </div>
-            <div>
-                <p style="display: inline-block;">Title of viewing page:</p>
-                <input type="text" style="display: inline-block;" id="title">
-            </div>
-            <div>
-                <p style="display: inline-block;">Description of viewing page (displays on open graph supporting services):</p>
-                <input type="text" style="display: inline-block;" id="description">
-            </div>
+    <body style="margin: 0px;">
+        <div style="height: 100%; width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+            <video id="videobox" src="" controls style="object-fit: contain; height: 100%; width: 100%; background-color: black;"></video>
         </div>
-        <p style="display: inline-block;">Output URL:</p>
-        <button id="submit" style="display: inline-block;" onclick="submit();">Submit</button>
-        <input readonly type="text" id="copy">
+        <script>
+            document.getElementById("videobox").src = decodeURIComponent(params["url"]);
+        </script>
     </body>
 </html>
