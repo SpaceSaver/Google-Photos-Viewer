@@ -9,14 +9,20 @@
         <link id="icon16" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-16x16.png" sizes="16x16">
         <link id="icon32" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-32x32.png" sizes="32x32">
         <link id="icon64" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-96x96.png" sizes="96x96">
-        <meta id="ogtitle" property="og:title">
-        <meta id="ogurl" property="og:url">
-        <meta id="ogtype" property="og:type" content="video.other">
-        <meta id="ogdescription" property="og:description">
-        <meta id="ogimage" property="og:image">
+        <!meta id="ogtitle" property="og:title">
+        <!meta id="ogurl" property="og:url">
+        <!meta id="ogtype" property="og:type" content="video.other">
+        <!meta id="ogdescription" property="og:description">
+        <!meta id="ogimage" property="og:image">
         <script>
             function basemod(base, args){
                 return base.split("=")[0] + "=" + args;
+            }
+            function createmeta(property, content){
+                var tag = document.createElement("meta");
+                tag.property = property;
+                tag.content = content;
+                document.head.appendChild(tag);
             }
             var params = getVarParse();
             var base = params["url"];
@@ -28,10 +34,15 @@
             document.getElementById("icon16").href = basemod(base, "w16-h16");
             document.getElementById("icon32").href = basemod(base, "w32-h32");
             document.getElementById("icon64").href = basemod(base, "w64-h64")
-            document.getElementById("ogtitle").content = params["title"];
+            /*document.getElementById("ogtitle").content = params["title"];
             document.getElementById("ogurl").content = window.location.href;
             document.getElementById("ogdescription").content = params["description"];
-            document.getElementById("ogimage").content = basemod(base, "w1920-h1080");
+            document.getElementById("ogimage").content = basemod(base, "w1920-h1080");*/
+            createmeta("og:title", params["title"]);
+            createmeta("og:url", window.location.href);
+            createmeta("og:type", "video.other");
+            createmeta("og:description", params["description"])
+            createmeta("og:image", basemod(base, "w1920-h1080"))
         </script>
     </head>
     <body style="margin: 0px;">
