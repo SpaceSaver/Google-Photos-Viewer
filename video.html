@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="ultimate-cookie-and-path-vars-pkg.js"></script>
+        <link id="appleo" rel="apple-touch-icon" href="older-iPhone.png">
+        <link id="apple6" rel="apple-touch-icon" sizes="180x180" href="iPhone-6-Plus.png">
+        <link id="appleret" rel="apple-touch-icon" sizes="152x152" href="iPad-Retina.png">
+        <link id="appletouch" rel="apple-touch-icon" sizes="167x167" href="iPad-Pro.png">
+        <link id="icon16" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-16x16.png" sizes="16x16">
+        <link id="icon32" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-32x32.png" sizes="32x32">
+        <link id="icon64" rel="icon" type="image/png" href="https://cdn.yourwebsite.com/favicon-96x96.png" sizes="96x96">
+        <meta id="ogtitle" property="og:title">
+        <meta id="ogurl" property="og:url">
+        <meta id="ogtype" property="og:type" content="video.other">
+        <meta id="ogdescription" property="og:description">
+        <meta id="ogimage" property="og:image">
+        <script>
+            function basemod(base, args){
+                return base.split("=")[0] + "=" + args;
+            }
+            var params = getVarParse();
+            var base = params["url"];
+            document.title = params["title"];
+            document.getElementById("appleo").href = basemod(base, "w120-h120");
+            document.getElementById("apple6").href = basemod(base, "w180-h180");
+            document.getElementById("appleret").href = basemod(base, "w152-h152");
+            document.getElementById("appletouch").href = basemod(base, "w167-h167");
+            document.getElementById("icon16").href = basemod(base, "w16-h16");
+            document.getElementById("icon32").href = basemod(base, "w32-h32");
+            document.getElementById("icon64").href = basemod(base, "w64-h64")
+            document.getElementById("ogtitle").content = params["title"];
+            document.getElementById("ogurl").content = window.location.href;
+            document.getElementById("ogdescription").content = params["description"];
+            document.getElementById("ogimage").content = basemod(base, "w1920-h1080");
+        </script>
+    </head>
+    <body style="margin: 0px;">
+        <div style="height: 100%; width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+            <video id="videobox" src="" controls style="object-fit: contain; height: 100%; width: 100%; background-color: black;"></video>
+        </div>
+        <script>
+            document.getElementById("videobox").src = decodeURIComponent(params["url"]);
+        </script>
+    </body>
+</html>

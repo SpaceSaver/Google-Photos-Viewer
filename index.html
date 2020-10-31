@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Google Video Viewer</title>
+        <script>
+            function submit(){
+                var box = document.getElementById("url");
+                var copy = document.getElementById("copy");
+                var titlebox = document.getElementById("title");
+                var descriptionbox = document.getElementById("description");
+                copy.value = window.location.href.replace(/\/index\.html.*/, "") + "/video.html?url=" + encodeURIComponent(box.value.split("=")[0] + "=dv") + "&title=" + encodeURIComponent(titlebox.value) + "&description=" + encodeURIComponent(descriptionbox.value);
+                copy.select();
+                copy.setSelectionRange(0, 99999);
+                document.execCommand("copy");
+            }
+        </script>
+    </head>
+    <body>
+        <h3>Creation Attributes:</h3>
+        <div style="margin-left: 5%;">
+            <div>
+                <p style="display: inline-block;">Base url of item:</p>
+                <input type="text" style="display: inline-block;" id="url">
+            </div>
+            <div>
+                <p style="display: inline-block;">Title of viewing page:</p>
+                <input type="text" style="display: inline-block;" id="title">
+            </div>
+            <div>
+                <p style="display: inline-block;">Description of viewing page (displays on open graph supporting services):</p>
+                <input type="text" style="display: inline-block;" id="description">
+            </div>
+        </div>
+        <p style="display: inline-block;">Output URL:</p>
+        <button id="submit" style="display: inline-block;" onclick="submit();">Submit</button>
+        <input readonly type="text" id="copy">
+    </body>
+</html>
